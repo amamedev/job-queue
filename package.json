@@ -1,0 +1,25 @@
+{
+  "name": "job-queue",
+  "version": "1.0.0",
+  "description": "job-queue project",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amamedev/job-queue.git"
+  },
+  "author": "Alejando Marín Melero",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amamedev/job-queue/issues"
+  },
+  "homepage": "https://github.com/amamedev/job-queue#readme",
+  "dependencies": {
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1"
+  }
+}
