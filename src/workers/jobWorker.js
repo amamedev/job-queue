@@ -1,13 +1,17 @@
-const processJob = async (job) => {
-  console.log(`Procesando job: ${job.id}`);
-  job.status = "processing";
+// Worker para procesar tareas
+const createdJob = async (job) => {
+  console.log("Procesando tarea...");
 
-  await new Promise((resolve) => setTimeout(resolve, 8000));
+  // Simular trabajo con asincronía
+  for (let i = 0; i < 10; i++) {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    console.log(`${i * 10}% procesado`);
+  }
 
-  job.status = "completed";
-  job.result = `Resultado del job ${job.id}`;
+  job.status = "procesada";
+  job.result = "resuelta";
 
-  console.log(`Job ${job.id} completado`);
+  console.log("Tarea procesada");
 };
 
-export default processJob;
+export { createdJob };

@@ -1,3 +1,6 @@
+/**
+ * Configuración de variables de entorno
+ */
 import dotenv from "dotenv";
 
 dotenv.config();

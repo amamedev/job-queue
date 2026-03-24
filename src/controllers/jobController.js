@@ -1,39 +1,56 @@
-import jobService from "../services/jobService.js";
+/**
+ * Controlador de peticiones y respuestas para las tareas
+ */
+import jobServices from "../services/jobServices.js";
 
 const jobController = {
-  postJob: (req, res, next) => {
+  // Bienvenida
+  welcome: (req, res, next) => {
     try {
-      const job = jobService.createJob();
-      if (!job) {
-        return res.status(500).json({
-          success: false,
-          message: "Error al crear el job",
-        });
-      }
       res.json({
-        success: true,
-        message: "Job creado correctamente",
-        data: job,
+        status: 200,
+        message: "Bienvenido",
       });
     } catch (error) {
       next(error);
     }
   },
 
-  getAllJobs: (req, res, next) => {
+  // Crear nueva tarea
+  postJob: (req, res, next) => {
     try {
-      const jobs = jobService.getAllJobs();
-      console.log(jobs);
-      if (jobs.length === 0) {
-        return res.status(404).json({
-          success: false,
-          message: "No hay jobs",
-          data: jobs,
+      const createdJob = jobServices.createJob();
+      if (!createdJob) {
+        return res.status(500).json({
+          status: 500,
+          message: "No se pudo crear la tarea",
         });
       }
-      res.json({
-        success: true,
-        message: "Jobs obtenidos correctamente",
+      res.status(200).json({
+        status: 200,
+        message: "Tarea creada correctamente",
+        data: createdJob,
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  // Obtener todas las tareas
+  getJobs: (req, res, next) => {
+    try {
+      const jobs = jobServices.getJobs();
+      if (!jobs) {
+        return res.status(500).json({
+          status: 500,
+          message: "No se puedieron obtener las tareas",
+        });
+      } else if (jobs.length === 0) {
+        return res.sendStatus(204);
+      }
+      res.status(200).json({
+        status: 200,
+        message: "Tareas obtenidas",
         data: jobs,
       });
     } catch (error) {
@@ -41,19 +58,20 @@ const jobController = {
     }
   },
 
+  // Obrener tarea por id
   getJobById: (req, res, next) => {
-    const id = parseInt(req.params.id);
     try {
-      const job = jobService.getJobById(id);
+      const id = parseInt(req.params.id);
+      const job = jobServices.getJobById(id);
       if (!job) {
         return res.status(404).json({
-          success: false,
-          message: "Job no encontrado",
+          status: 404,
+          message: "No se encontró niguna tarea",
         });
       }
-      res.json({
-        success: true,
-        message: "Job obtenido correctamente",
+      res.status(200).json({
+        status: 200,
+        message: "Tarea obtenida",
         data: job,
       });
     } catch (error) {
