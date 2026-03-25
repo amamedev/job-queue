@@ -58,7 +58,7 @@ Cuando se crea una tarea:
 
 - Se almacena en memoria
 - Se emite el evento `createdJob`
-- Un listenner escucha este evento y el worker procesa la tarea en segundo plano
+- Un listener escucha este evento y el worker procesa la tarea en segundo plano
 
 ```js
 const job = {
